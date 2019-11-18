@@ -7,18 +7,17 @@ If present, the @HD record must be the first record and specifies the SAM versio
 
 
 ## Pseudocode
-Parse through file until non-header line(with no @ sign in the beginning)
-readline()
-if ^@:
-	if forward:
-		if check_UMI:
-			read cigar string and adjust soft clipping
-			check_alignment_position
+Open file and read each line at a time
+	if doesn't start with @:
+		if forward:
+			if check_UMI:
+				read cigar string(line[5]) and adjust soft clipping
+				check_alignment_position
 
-	if reverse:
-		if check_UMI:
-			read cigar string and adjust for soft clipping
-			check_alignment_postion
+		if reverse:
+			if check_UMI:
+				read cigar string and adjust for soft clipping
+				check_alignment_postion
 
 
 ## Functions
@@ -26,7 +25,7 @@ def check_UMI(string):
 	```input samfile column 1, return if UMI is one of the known UMIs```
 	return True,False
 
-start a dictionary with key: RNAME_POS
+start a dictionary with key: RNAME_POS_UMI
 def check_alignment_position(string):
 	``````
 	if key exists:
@@ -34,15 +33,15 @@ def check_alignment_position(string):
 	if key doesn't exist yet:
 		update dictionary with new kew
 		write to the output file
-
+#
 def adjust_soft_clipping():
 	```add the amount of soft clipping"
 	if forward:
-		add first number of S to the POS
+		subtract first number of S to the POS
 	if reverse:
-		add last number of S to the POS
-if cigar string is 2S15M starting at pos 20 forward strand,
-then adjust the starting position to 22
-
-if cigar string is 15M2S starting at pos 20 reverse strand
-then adjust the position to 22
+		add all number to POS except I
+if cigar string is 2S15M5I8D8N9M starting at pos 20 forward strand,
+then adjust the starting position to 18
+#
+if cigar string is 2S15M5I8D8N9M starting at pos 20 reverse strand
+then adjust the position to 20+2+15+8+8+9
