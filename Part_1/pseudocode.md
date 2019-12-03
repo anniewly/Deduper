@@ -18,27 +18,27 @@ Here we want to build a tool to remove all the PCR duplicates. PCR duplicates sa
 
 
 ## Functions
-def check_UMI(string):
-	```input samfile column 1, return if UMI is one of the known UMIs```
-	return True,False
+		def check_UMI(string):
+			```input samfile column 1, return if UMI is one of the known UMIs```
+			return True,False
 
-start a dictionary with key: RNAME_POS_UMI
-def check_alignment_position(string):
-	``````
-	if key exists:
-		toss the read
-	if key doesn't exist yet:
-		update dictionary with new kew
-		write to the output file
-#
-def adjust_soft_clipping():
-	```add the amount of soft clipping"
-	if forward:
-		subtract first number of S to the POS
-	if reverse:
-		add all number to POS except I
-if cigar string is 2S15M5I8D8N9M starting at pos 20 forward strand,
-then adjust the starting position to 18
-#
-if cigar string is 2S15M5I8D8N9M starting at pos 20 reverse strand
-then adjust the position to 20+2+15+8+8+9
+		start a dictionary with key: RNAME_POS_UMI
+		def check_alignment_position(string):
+			``````
+			if key exists:
+				toss the read
+			if key doesn't exist yet:
+				update dictionary with new kew
+				write to the output file
+		#
+		def adjust_soft_clipping():
+			```add the amount of soft clipping"
+			if forward:
+				subtract first number of S to the POS
+			if reverse:
+				add all number to POS except I
+		if cigar string is 2S15M5I8D8N9M starting at pos 20 forward strand,
+		then adjust the starting position to 18
+		#
+		if cigar string is 2S15M5I8D8N9M starting at pos 20 reverse strand
+		then adjust the position to 20+2+15+8+8+9
