@@ -3,21 +3,18 @@
 ## Define the problem
 Here we want to build a tool to remove all the PCR duplicates. PCR duplicates satisfy a couple criteria. First, they have the same UMI. Second, they are at the same location of a specific chromosome strand. In addition, the algorithm should identify and adjust for soft clipping.
 
-If present, the @HD record must be the first record and specifies the SAM version (tag VN) used in this file and the sort order (SO). The optional @SQ header records give the reference sequence names (tag SN) and lengths (tag LN). There also are other header record types.
-
-
 ## Pseudocode
-Open file and read each line at a time
-	if doesn't start with @:
-		if forward:
-			if check_UMI:
-				read cigar string(line[5]) and adjust soft clipping
-				check_alignment_position
+		Open file and read each line at a time
+			if doesn't start with @:
+				if forward:
+					if check_UMI:
+						read cigar string(line[5]) and adjust soft clipping
+						check_alignment_position
 
-		if reverse:
-			if check_UMI:
-				read cigar string and adjust for soft clipping
-				check_alignment_postion
+				if reverse:
+					if check_UMI:
+						read cigar string and adjust for soft clipping
+						check_alignment_postion
 
 
 ## Functions
