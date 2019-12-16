@@ -45,12 +45,12 @@ def adjust_position(CIGAR, POS):
     '''if forward:subtract first number of S to the POS
     if reverse:add all number to POS except I + left S'''
     if (flag & 16) != 16:
-    	strand='f'
+        strand='f'
         leftclip = re.compile(r'^\d+S').findall(CIGAR)
         if len(leftclip) > 0:
             POS = POS - int(leftclip[0][0])
     elif (flag & 16) == 16:
-    	strand='r'
+        strand='r'
         num = 0
         seqlen = re.compile(r'\d+(?=[MDNP=X])').findall(CIGAR)
         for i in range(len(seqlen)):
